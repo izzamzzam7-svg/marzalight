@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AM Premium -marz </title>
+    <style>
+        /* ==================================================
+           TEMA NEUBRUTALISM 3D COMIC
+           ================================================== */
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@700;900&display=swap');
+
+        :root {
+            --bg-page: #e8f0fe;
+            --panel-bg: #ffffff;
+            --primary: #ff4757;
+            --secondary: #1e90ff;
+            --success: #2ed573;
+            --dark: #2f3542;
+            --border: 4px solid #1e2128;
+            --shadow: 8px 8px 0px #1e2128;
+            --font-head: 'Bangers', cursive;
+            --font-body: 'Nunito', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-page);
+            background-image: radial-gradient(#1e2128 1.5px, transparent 1.5px);
+            background-size: 25px 25px;
+            font-family: var(--font-body);
+            color: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 420px;
+            position: relative;
+        }
+
+        .comic-card {
+            background: var(--panel-bg);
+            border: var(--border);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 30px 25px;
+            position: relative;
+            margin-bottom: 20px;
+            animation: popIn 0.3s ease-out;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .app-title {
+            font-family: var(--font-head);
+            font-size: 3.5rem;
+            text-align: center;
+            color: var(--primary);
+            text-shadow: 3px 3px 0px var(--dark);
+            letter-spacing: 2px;
+            transform: rotate(-2deg);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .sub-title {
+            text-align: center;
+            font-weight: 900;
+            font-size: 1rem;
+            background: var(--dark);
+            color: white;
+            padding: 5px 15px;
+            display: inline-block;
+            border-radius: 8px;
+            margin: 0 auto 25px auto;
+            transform: rotate(1deg);
+        }
+
+        .watermark {
+            position: absolute;
+            top: -15px;
+            right: 10px;
+            background: var(--dark);
+            color: white;
+            font-family: var(--font-head);
+            font-size: 1.2rem;
+            padding: 2px 12px;
+            border: 3px solid white;
+            border-radius: 8px;
+            box-shadow: 3px 3px 0px var(--primary);
+            transform: rotate(5deg);
+        }
+
+        .input-group { margin-bottom: 20px; }
+        label {
+            display: block;
+            font-weight: 900;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        input {
+            width: 100%;
+            padding: 15px;
+            border: var(--border);
+            border-radius: 10px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 1rem;
+            outline: none;
+            box-shadow: inset 4px 4px 0px rgba(0,0,0,0.08);
+            transition: 0.2s;
+        }
+        input:focus { box-shadow: inset 4px 4px 0px var(--secondary); }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: var(--border);
+            border-radius: 10px;
+            font-family: var(--font-head);
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            color: white;
+            text-shadow: 2px 2px 0px var(--dark);
+            background-color: var(--primary);
+            box-shadow: 5px 5px 0px var(--dark);
+            cursor: pointer;
+            transition: all 0.1s;
+            margin-bottom: 15px;
+        }
+        .btn:active {
+            transform: translate(5px, 5px);
+            box-shadow: 0px 0px 0px var(--dark);
+        }
+        .btn-blue { background-color: var(--secondary); }
+        .btn-green { background-color: var(--success); }
+        .btn-grey { background-color: #a4b0be; text-shadow: 2px 2px 0px #2f3542; }
+
+        .notif {
+            display: none;
+            border: var(--border);
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            box-shadow: 4px 4px 0px var(--dark);
+            text-align: center;
+        }
+        .notif-success { background: #d4edda; color: #155724; }
+        .notif-error { background: #f8d7da; color: #721c24; }
+
+        .loading {
+            display: none;
+            text-align: center;
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-top: 15px;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        /* Header Khusus Dashboard */
+        .dash-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px dashed #b2bec3;
+        }
+        .dash-header h2 {
+            font-family: var(--font-head);
+            font-size: 2rem;
+            color: var(--secondary);
+            letter-spacing: 1px;
+        }
+        .dash-header p {
+            font-weight: 900;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        .step-container { display: none; }
+        .step-active { display: block; }
+        .divider { border-top: 3px dashed #b2bec3; margin: 25px 0; }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <!-- Header Global -->
+        <div class="app-title">AM PREMIUM</div>
+        <div style="text-align: center;">
+            <div class="sub-title">ACCESS PORTAL</div>
+        </div>
+
+        <!-- ================= 1. HALAMAN LOGIN ================= -->
+        <div id="page-login" class="comic-card" style="display: block;">
+            <div class="watermark">By Marz</div>
+            <div id="notif-login" class="notif notif-error"></div>
+            
+            <div style="text-align: center; font-size: 3rem; margin-bottom: 10px;">🔒</div>
+            <h3 style="text-align: center; margin-bottom: 20px; font-weight: 900;">Masukkan Access Key</h3>
+            
+            <div class="input-group">
+                <input type="password" id="access-key" placeholder="Ketik Key Disini...">
+            </div>
+            <button class="btn btn-blue" onclick="login()">MASUK</button>
+        </div>
+
+        <!-- ================= 2. HALAMAN DASHBOARD ================= -->
+        <div id="page-dashboard" class="comic-card" style="display: none;">
+            <div class="watermark">By Marz</div>
+            
+            <!-- Header Dashboard (Tanpa Free Member) -->
+            <div class="dash-header">
+                <h2>MAIN MENU</h2>
+                <p>Silakan pilih layanan di bawah ini</p>
+            </div>
+
+            <div id="notif-dash" class="notif notif-error"></div>
+
+            <button class="btn" onclick="startFlow()">📨 SEND LINK</button>
+            <button class="btn btn-grey" onclick="showGuide()">ℹ️ PANDUAN</button>
+        </div>
+
+        <!-- ================= 3. HALAMAN PROSES (BERTAHAP) ================= -->
+        <div id="page-flow" class="comic-card" style="display: none;">
+            <div class="watermark">By Marz</div>
+            <div id="notif-flow" class="notif notif-error"></div>
+
+            <!-- STEP 1 -->
+            <div id="step-1" class="step-container step-active">
+                <h3 style="margin-bottom: 15px; font-weight: 900;">1. Kirim Magic Link</h3>
+                <div class="input-group">
+                    <input type="email" id="email-input" placeholder="Masukkan Email Aktif...">
+                </div>
+                <button class="btn" onclick="processStep1()">KIRIM LINK</button>
+                <button class="btn btn-grey" style="font-size: 1.2rem; padding: 10px;" onclick="switchPage('page-dashboard')">BATAL</button>
+            </div>
+
+            <!-- STEP 2 -->
+            <div id="step-2" class="step-container">
+                <div class="divider"></div>
+                <h3 style="margin-bottom: 15px; font-weight: 900; color: var(--success);">2. Verifikasi Link</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 15px; font-weight: 700;">Cek kotak masuk email kamu, lalu paste link-nya di sini.</p>
+                <div class="input-group">
+                    <input type="text" id="link-input" placeholder="Paste Magic Link...">
+                </div>
+                <button class="btn btn-green" onclick="processStep2()">VERIFIKASI</button>
+            </div>
+
+            <!-- STEP 3 -->
+            <div id="step-3" class="step-container">
+                <div class="divider"></div>
+                <div style="text-align: center;">
+                    <div style="font-size: 4rem; margin-bottom: 10px;">🎉</div>
+                    <h3 style="color: var(--success); font-family: var(--font-head); font-size: 2.5rem; letter-spacing: 1px;">SUKSES!</h3>
+                    <p style="font-weight: 900; margin-bottom: 20px;">Akun premium kamu sudah aktif.</p>
+                    <button class="btn btn-blue" onclick="switchPage('page-dashboard')">KEMBALI KE MENU</button>
+                </div>
+            </div>
+
+            <div id="loading-flow" class="loading">MEMPROSES...</div>
+        </div>
+
+        <!-- ================= 4. HALAMAN PANDUAN ================= -->
+        <div id="page-guide" class="comic-card" style="display: none;">
+            <div class="watermark">By Marz</div>
+            <h3 style="margin-bottom: 15px; font-weight: 900;">📖 Panduan Penggunaan</h3>
+            <ol style="margin-left: 20px; font-weight: 700; line-height: 1.8; margin-bottom: 20px;">
+                <li>Klik menu <b>Send Link</b>.</li>
+                <li>Masukkan email aktif kamu, lalu klik Kirim.</li>
+                <li>Cek email, lalu copy link yang dikirim.</li>
+                <li>Kembali ke web, paste link di kolom verifikasi.</li>
+                <li>Klik Verifikasi, dan akun premium otomatis aktif!</li>
+            </ol>
+            <button class="btn btn-grey" onclick="switchPage('page-dashboard')">KEMBALI</button>
+        </div>
+
+    </div>
+
+    <!-- ==================================================
+         JAVASCRIPT LOGIC
+         ================================================== -->
+    <script>
+        const API_URL = "https://anita-studio.netlify.app/.netlify/functions/amprem";
+        const VALID_KEY = "MARZ-VIP"; 
+        let userEmail = "";
+
+        // Fungsi Navigasi Halaman
+        function switchPage(pageId) {
+            document.querySelectorAll('.comic-card').forEach(el => el.style.display = 'none');
+            document.getElementById(pageId).style.display = 'block';
+            hideAllNotif();
+        }
+
+        // Fungsi Notifikasi
+        function showNotif(elementId, msg, type) {
+            const el = document.getElementById(elementId);
+            el.innerText = msg;
+            el.className = `notif notif-${type}`;
+            el.style.display = 'block';
+        }
+        function hideAllNotif() {
+            document.querySelectorAll('.notif').forEach(el => el.style.display = 'none');
+        }
+
+        // Loading
+        function setLoading(id, isLoading) {
+            document.getElementById(id).style.display = isLoading ? 'block' : 'none';
+        }
+
+        // Login
+        function login() {
+            const key = document.getElementById('access-key').value;
+            if (key === VALID_KEY) {
+                switchPage('page-dashboard');
+            } else {
+                showNotif('notif-login', "Access Key Salah! Silakan coba lagi.", "error");
+            }
+        }
+
+        // Mulai Alur
+        function startFlow() {
+            document.getElementById('step-1').classList.add('step-active');
+            document.getElementById('step-2').classList.remove('step-active');
+            document.getElementById('step-3').classList.remove('step-active');
+            document.getElementById('email-input').value = "";
+            document.getElementById('email-input').disabled = false;
+            document.getElementById('link-input').value = "";
+            switchPage('page-flow');
+        }
+
+        // Buka Panduan
+        function showGuide() { switchPage('page-guide'); }
+
+        // API Call
+        async function callApi(action, data) {
+            try {
+                const res = await fetch(API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ action, ...data })
+                });
+                return await res.json();
+            } catch (e) {
+                return { success: false, message: "Koneksi ke server gagal." };
+            }
+        }
+
+        // STEP 1: Kirim Link
+        async function processStep1() {
+            const email = document.getElementById('email-input').value;
+            if (!email || !email.includes("@")) {
+                return showNotif('notif-flow', "Format email tidak valid!", "error");
+            }
+
+            hideAllNotif();
+            setLoading('loading-flow', true);
+
+            const res = await callApi("send-magiclink", { email });
+
+            setLoading('loading-flow', false);
+
+            if (res.success) {
+                userEmail = email;
+                showNotif('notif-flow', "Link terkirim! Cek email kamu.", "success");
+                document.getElementById('email-input').disabled = true;
+                document.getElementById('step-1').classList.remove('step-active'); // Sembunyikan step 1
+                document.getElementById('step-2').classList.add('step-active');    // Munculkan step 2
+            } else {
+                showNotif('notif-flow', res.message || "Gagal mengirim link.", "error");
+            }
+        }
+
+        // STEP 2: Verifikasi & Aktifkan
+        async function processStep2() {
+            const link = document.getElementById('link-input').value;
+            if (!link) return showNotif('notif-flow', "Masukkan link dari email!", "error");
+
+            hideAllNotif();
+            setLoading('loading-flow', true);
+
+            // 1. Verifikasi
+            const resVerify = await callApi("verify-account", { email: userEmail, rawLink: link });
+            
+            if (!resVerify.success) {
+                setLoading('loading-flow', false);
+                return showNotif('notif-flow', resVerify.message || "Verifikasi gagal.", "error");
+            }
+
+            const idToken = resVerify.idToken || (resVerify.profile && resVerify.profile.idToken);
+            if (!idToken) {
+                setLoading('loading-flow', false);
+                return showNotif('notif-flow', "Token verifikasi tidak ditemukan.", "error");
+            }
+
+            // 2. Premium
+            const resPrem = await callApi("apply-premium", { email: userEmail, idToken });
+
+            setLoading('loading-flow', false);
+
+            if (resPrem.success) {
+                hideAllNotif();
+                document.getElementById('step-2').classList.remove('step-active'); // Sembunyikan step 2
+                document.getElementById('step-3').classList.add('step-active');    // Munculkan step 3
+            } else {
+                showNotif('notif-flow', resPrem.message || "Gagal mengaktifkan premium.", "error");
+            }
+        }
+    </script>
+</body>
+</html>
